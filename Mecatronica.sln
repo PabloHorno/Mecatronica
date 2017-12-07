@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mecatronica", "Mecatronica\Mecatronica.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Pruebas", "Pruebas\Pruebas.vcxproj", "{9283A92E-458C-4085-B22C-4F4701B1EA6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
+		{9283A92E-458C-4085-B22C-4F4701B1EA6C}.Debug|x86.ActiveCfg = Debug|Win32
+		{9283A92E-458C-4085-B22C-4F4701B1EA6C}.Debug|x86.Build.0 = Debug|Win32
+		{9283A92E-458C-4085-B22C-4F4701B1EA6C}.Release|x86.ActiveCfg = Release|Win32
+		{9283A92E-458C-4085-B22C-4F4701B1EA6C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

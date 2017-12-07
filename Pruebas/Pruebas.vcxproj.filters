@@ -15,25 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mecatronica.ino" />
+    <None Include="Pruebas.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="__vm\.Mecatronica.vsarduino.h">
+    <ClInclude Include="__vm\.Pruebas.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PantallaTFT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="PantallaTFT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
