@@ -6,7 +6,7 @@
 
 #include "MaquinaVending.h"
 
-MaquinaVending maquina;
+MaquinaVending maquina(SDA_DIO, RESET_DIO);
 
 void setup() {
 	maquina.init();

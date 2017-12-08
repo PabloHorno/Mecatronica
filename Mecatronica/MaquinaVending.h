@@ -8,19 +8,19 @@
 #else
 	#include "WProgram.h"
 #endif
-#include <SPI.h>
-#include <RFID.h>
 #include "PantallaTFT.h"
 /* Define the DIO used for the SDA (SS) and RST (reset) pins. */
+#include <SPI.h>
+#include <RFID.h>
 #define SDA_DIO 28
 #define RESET_DIO 29
-/* Create an instance of the RFID library */
-//RFID lector(SDA_DIO, RESET_DIO);
+
 class MaquinaVending
 {
  public:
+	 MaquinaVending(int sda, int reset):lector(sda,reset) {};
 	 PantallaTFT pantalla;
-
+	 RFID lector;
 	void init();
 
 };

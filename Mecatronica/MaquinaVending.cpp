@@ -7,5 +7,6 @@
 void MaquinaVending::init()
 {
 	SPI.begin();
+	lector.init();
 	pantalla.init();
 }
