@@ -23,12 +23,16 @@ void PantallaTFT::mostrarMenu()
 }
 void PantallaTFT::init()
 {
+#pragma region Inicializacion TFT
+
 	Serial.println(F("TFT LCD test"));
 	Serial.print("Tamaño de TFT"); Serial.print(tft.width()); Serial.print("x"); Serial.println(tft.height());
 	tft.reset();
 	uint16_t identifier = tft.readID();
 	tft.begin(identifier);
 	tft.fillScreen(Color::Negro);
+
+#pragma endregion
 
 #pragma region Inicializacion SD
 	bool good = SD.begin(SD_CS);

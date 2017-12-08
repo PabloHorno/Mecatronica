@@ -4,14 +4,15 @@
  Author:	Pablo y Marta
 */
 
-#include "PantallaTFT.h"
+#include "MaquinaVending.h"
 
-PantallaTFT pantalla;
+MaquinaVending maquina;
+
 void setup() {
-	pantalla.init();
+	maquina.init();
 }
 
 void loop() {
-	pantalla.mostrarMenu();
+	maquina.pantalla.mostrarMenu();
 	delay(1000);
 }
