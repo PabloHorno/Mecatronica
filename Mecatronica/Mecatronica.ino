@@ -14,5 +14,9 @@ void setup() {
 
 void loop() {
 	maquina.pantalla.inicio();
+	if (maquina.lector.isCard())
+	{
+		maquina.lector.readCardSerial();
+	}
 	delay(1000);
 }

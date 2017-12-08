@@ -19,8 +19,12 @@
 14	
 --&gt;15	void loop() {
 16		maquina.pantalla.inicio();
-17		delay(1000);
-18	}
+17		if (maquina.lector.isCard())
+18		{
+19			maquina.lector.readCardSerial();
+20		}
+21		delay(1000);
+22	}
 </Source>
         <MessageVariables>
           <MessageVariable Name="millis()" Index="1" />

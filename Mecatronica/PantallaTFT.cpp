@@ -28,19 +28,20 @@ void PantallaTFT::inicio()
 	if (ventanaActual == Ventana::Inicio)
 		return;
 	ventanaActual = Ventana::Inicio;
-	tft.fillScreen(Color::Negro);
-	tft.setTextColor(Color::Amarillo);
+	tft.fillScreen(Color::Blanco);
+	tft.setTextColor(Color::Negro);
 	tft.setTextSize(3);
-	tft.setCursor(0, 0);
+	tft.setCursor(0, 10);
 	printCentrado("ACERQUE");
 	printCentrado("TARJETA NFC");
 	tft.setTextSize(1);
-	tft.setCursor(0, tft.height()-30);
-	tft.setTextColor(Color::Azul);
+	tft.setCursor(10, tft.height()-30);
+	tft.setTextColor(Color::Rojo);
 	tft.println("Maquina Vending - Mecatronica 2017\n");
 	tft.setTextSize(1);
-	tft.setTextColor(Color::Verde);
+	tft.setTextColor(Color::Azul);
 	tft.println("@Pablo Horno y Marta Vidal");
+	dibujarBMP("nfc.bmp", tft.width() * 1 / 4, tft.height() * 1 / 3);
 }
 
 void PantallaTFT::printCentrado(String txt)
@@ -64,8 +65,7 @@ void PantallaTFT::init()
 #pragma region Inicializacion SD
 	bool good = SD.begin(SD_CS);
 	if (!good) {
-		Serial.print(F("cannot start SD"));
-		//while (1);
+		Serial.print(F("No se pudo iniciar tarjeta SD"));
 	}
 #pragma endregion
 
@@ -128,19 +128,19 @@ void PantallaTFT::dibujarBMP(char *filename, int x, int y) {
 	if ((x >= tft.width()) || (y >= tft.height())) return;
 
 	Serial.println();
-	Serial.print("Loading image '");
+	Serial.print("Cargando Imagen '");
 	Serial.print(filename);
 	Serial.println('\'');
 	// Open requested file on SD card
 	SPCR = spi_save;
 	if ((bmpFile = SD.open(filename)) == NULL) {
-		Serial.print("File not found");
+		Serial.print("Archivo no encontrado.");
 		return;
 	}
 
 	// Parse BMP header
 	if (read16(bmpFile) == 0x4D42) { // BMP signature
-		Serial.print(F("File size: ")); Serial.println(read32(bmpFile));
+		Serial.print(F("Tamanio de archivo: ")); Serial.println(read32(bmpFile));
 		(void)read32(bmpFile); // Read & ignore creator bytes
 		bmpImageoffset = read32(bmpFile); // Start of image data
 		Serial.print(F("Image Offset: ")); Serial.println(bmpImageoffset, DEC);
