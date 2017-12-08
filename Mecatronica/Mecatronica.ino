@@ -13,6 +13,6 @@ void setup() {
 }
 
 void loop() {
-	maquina.pantalla.mostrarMenu();
+	maquina.pantalla.inicio();
 	delay(1000);
 }

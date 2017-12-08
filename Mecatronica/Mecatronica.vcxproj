@@ -86,14 +86,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LectorRIFD.h" />
     <ClInclude Include="MaquinaVending.h" />
     <ClInclude Include="PantallaTFT.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="__vm\.Mecatronica.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LectorRIFD.cpp" />
     <ClCompile Include="MaquinaVending.cpp" />
     <ClCompile Include="PantallaTFT.cpp" />
     <ClCompile Include="Vector2.cpp" />

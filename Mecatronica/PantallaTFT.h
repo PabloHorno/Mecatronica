@@ -41,27 +41,30 @@ private:
 	MCUFRIEND_kbv tft; 
 	TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 
-	int radio = 0;
-
-public:
-	PantallaTFT() {};
-	void init();
-	void mostrarMenu();
-	void dibujarRejilla();
 	const int maxPresion = 1000;
 	const int minPresion = 10;
 	const int limiteTouchDerecha = 170;
 	const int limiteTouchIzquierda = 880;
 	const int limiteTouchSuperior = 950;
-	const int limiteTouchInferior = 180;
+	const int limiteTouchInferior = 180;	
+	uint16_t read16(File f);
+	uint32_t read32(File f);
+	enum Ventana{Inicio,Seleccion,none};
+	Ventana ventanaActual = Ventana::none;
+public:
+	PantallaTFT() {};
+	void printCentrado(String txt);
+	void init();
+	int seleccionProducto();
+	void inicio();
+	void dibujarRejilla();
 
 	Vector2<int> getTouchPoint();
 	Vector2<int> getTouchPoint(int&);
 	inline bool esPresionSuficiente(const int presion) { return presion>minPresion && presion < maxPresion; };
 	void dibujarBMP(char *filename, int x, int y);
 
-	uint16_t read16(File f);
-	uint32_t read32(File f);
+
 	
 };
 

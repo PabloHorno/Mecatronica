@@ -4,8 +4,9 @@
 
 #include "PantallaTFT.h"
 
-void PantallaTFT::mostrarMenu()
+int PantallaTFT::seleccionProducto()
 {
+	ventanaActual == Ventana::Seleccion;
 	dibujarRejilla();
 
 	while (1) {
@@ -20,6 +21,32 @@ void PantallaTFT::mostrarMenu()
 			tft.print("X=" + String(punto.X) + " Y=" + String(punto.Y) + "\nPresion= " + String(presion));
 		}
 	}
+	return 0;
+}
+void PantallaTFT::inicio()
+{
+	if (ventanaActual == Ventana::Inicio)
+		return;
+	ventanaActual = Ventana::Inicio;
+	tft.fillScreen(Color::Negro);
+	tft.setTextColor(Color::Amarillo);
+	tft.setTextSize(3);
+	tft.setCursor(0, 0);
+	printCentrado("ACERQUE");
+	printCentrado("TARJETA NFC");
+	tft.setTextSize(1);
+	tft.setCursor(0, tft.height()-30);
+	tft.setTextColor(Color::Azul);
+	tft.println("Maquina Vending - Mecatronica 2017\n");
+	tft.setTextSize(1);
+	tft.setTextColor(Color::Verde);
+	tft.println("@Pablo Horno y Marta Vidal");
+}
+
+void PantallaTFT::printCentrado(String txt)
+{
+	tft.setCursor((240 - txt.length() * 240 / 13) / 2, tft.getCursorY());
+	tft.println(txt);
 }
 void PantallaTFT::init()
 {
@@ -38,7 +65,7 @@ void PantallaTFT::init()
 	bool good = SD.begin(SD_CS);
 	if (!good) {
 		Serial.print(F("cannot start SD"));
-		while (1);
+		//while (1);
 	}
 #pragma endregion
 
