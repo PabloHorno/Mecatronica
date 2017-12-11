@@ -4,21 +4,36 @@
 
 #include "PantallaTFT.h"
 
-int PantallaTFT::seleccionProducto()
-{
-	ventanaActual == Ventana::Seleccion;
-	dibujarRejilla();
 
+int PantallaTFT::seleccionProducto(Casilla casillas[])
+{
+	if (ventanaActual != Ventana::Seleccion) { //Renderizados que solo se dibujan una vez
+		tft.fillScreen(Color::Negro);
+		for (int i = 0; i < 9; i++)
+		{
+			dibujarBMP(casillas[i].imagen, casillas[i].region.X, casillas[i].region.Y);
+		}
+		dibujarRejilla();
+	}
+	ventanaActual = Ventana::Seleccion;
 	while (1) {
 		int presion;
 		Vector2<int> punto = getTouchPoint(presion);
 		if (esPresionSuficiente(presion))
 		{
-			dibujarBMP("cocacola.bmp", 0, 0);
-			tft.setTextSize(2);
-			tft.setTextColor(Color::Amarillo, Color::Negro);
-			tft.setCursor(0, tft.height() * 3 / 4);
-			tft.print("X=" + String(punto.X) + " Y=" + String(punto.Y) + "\nPresion= " + String(presion));
+			for (int i = 0; i < 9; i++)
+			{
+				if (casillas[i].estaDentro(punto))
+				{
+					tft.setTextSize(2);
+					tft.setTextColor(Color::Azul, Color::Negro);
+					tft.fillRect(0, 320, tft.width(), 20, Color::Negro);
+					tft.setCursor(0, 320);
+					tft.println(String(casillas[i].producto)+"\n");
+					tft.setTextColor(Color::Verde, Color::Negro);
+					tft.println(String(casillas[i].precio, '\02') + "E");
+				}
+			}
 		}
 	}
 	return 0;
@@ -35,7 +50,7 @@ void PantallaTFT::inicio()
 	printCentrado("ACERQUE");
 	printCentrado("TARJETA NFC");
 	tft.setTextSize(1);
-	tft.setCursor(10, tft.height()-30);
+	tft.setCursor(10, tft.height() - 30);
 	tft.setTextColor(Color::Rojo);
 	tft.println("Maquina Vending - Mecatronica 2017\n");
 	tft.setTextSize(1);
@@ -54,7 +69,7 @@ void PantallaTFT::init()
 #pragma region Inicializacion TFT
 
 	Serial.println(F("TFT LCD test"));
-	Serial.print("Tamaño de TFT"); Serial.print(tft.width()); Serial.print("x"); Serial.println(tft.height());
+	Serial.print("Tamaño de TFT: width="+String(tft.width())+" height="+String(tft.height()));
 	tft.reset();
 	uint16_t identifier = tft.readID();
 	tft.begin(identifier);
@@ -72,12 +87,12 @@ void PantallaTFT::init()
 }
 void PantallaTFT::dibujarRejilla()
 {
-	tft.drawFastVLine(tft.width() * 2 / 3, 0, tft.height() * 3 / 4, Color::Rojo);
 	tft.drawFastVLine(tft.width() * 1 / 3, 0, tft.height() * 3 / 4, Color::Rojo);
+	tft.drawFastVLine(tft.width() * 2 / 3, 0, tft.height() * 3 / 4, Color::Rojo);
 
-	tft.drawFastHLine(0, tft.height() * 1 / 3 * 3 / 4, tft.width(), Color::Rojo);
-	tft.drawFastHLine(0, tft.height() * 2 / 3 * 3 / 4, tft.width(), Color::Rojo);
-	tft.drawFastHLine(0, tft.height() * 3 / 3 * 3 / 4, tft.width(), Color::Rojo);
+	tft.drawFastHLine(0, tft.height() * 1 / 4, tft.width(), Color::Rojo);
+	tft.drawFastHLine(0, tft.height() * 2 / 4, tft.width(), Color::Rojo);
+	tft.drawFastHLine(0, tft.height() * 3 / 4, tft.width(), Color::Rojo);
 }
 
 Vector2<int> PantallaTFT::getTouchPoint()
@@ -122,7 +137,7 @@ void PantallaTFT::dibujarBMP(char *filename, int x, int y) {
 	uint8_t	r, g, b;
 	uint32_t pos = 0, startTime = millis();
 	uint8_t	lcdidx = 0;
-	boolean	first = true; 
+	boolean	first = true;
 	uint8_t spi_save;
 
 	if ((x >= tft.width()) || (y >= tft.height())) return;
@@ -179,7 +194,7 @@ void PantallaTFT::dibujarBMP(char *filename, int x, int y) {
 				SPCR = 0;
 				tft.setAddrWindow(x, y, x + w - 1, y + h - 1);
 
-				for (row = 0; row<h; row++) { // For each scanline...
+				for (row = 0; row < h; row++) { // For each scanline...
 											  // Seek to start of scan line.  It might seem labor-
 											  // intensive to be doing this on every line, but this
 											  // method covers a lot of gritty details like cropping
@@ -196,7 +211,7 @@ void PantallaTFT::dibujarBMP(char *filename, int x, int y) {
 						buffidx = sizeof(sdbuffer); // Force buffer reload
 					}
 
-					for (col = 0; col<w; col++) { // For each column...
+					for (col = 0; col < w; col++) { // For each column...
 												  // Time to read more pixel data?
 						if (buffidx >= sizeof(sdbuffer)) { // Indeed
 														   // Push LCD buffer to the display first

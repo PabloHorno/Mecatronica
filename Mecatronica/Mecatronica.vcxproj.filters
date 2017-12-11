@@ -30,6 +30,12 @@
     <ClInclude Include="MaquinaVending.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Stepper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Casilla.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PantallaTFT.cpp">
@@ -39,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MaquinaVending.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stepper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Casilla.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

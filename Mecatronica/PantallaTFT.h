@@ -16,6 +16,7 @@
 #include <MCUFRIEND_kbv.h>
 #include <TouchScreen.h>
 #include "Vector2.h"
+#include "Casilla.h"
 
 // These are the pins for the shield!
 #define YP A1  // must be an analog pin, use "An" notation!
@@ -38,6 +39,9 @@ enum Color
 class PantallaTFT
 {
 private:
+	uint16_t read16(File f);
+	uint32_t read32(File f);
+public:
 	MCUFRIEND_kbv tft; 
 	TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 
@@ -46,16 +50,14 @@ private:
 	const int limiteTouchDerecha = 170;
 	const int limiteTouchIzquierda = 880;
 	const int limiteTouchSuperior = 950;
-	const int limiteTouchInferior = 180;	
-	uint16_t read16(File f);
-	uint32_t read32(File f);
+	const int limiteTouchInferior = 180;
 	enum Ventana{Inicio,Seleccion,none};
 	Ventana ventanaActual = Ventana::none;
-public:
+
 	PantallaTFT() {};
 	void printCentrado(String txt);
 	void init();
-	int seleccionProducto();
+	int seleccionProducto(Casilla casillas[]);
 	void inicio();
 	void dibujarRejilla();
 
