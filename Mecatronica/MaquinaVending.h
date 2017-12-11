@@ -15,8 +15,8 @@
 #include <SPI.h>
 #include <RFID.h>
 #include <String.h>
-#define SDA_DIO 28
-#define RESET_DIO 29
+#define SDA_DIO 53
+#define RESET_DIO 49
 
 class MaquinaVending
 {
@@ -30,10 +30,11 @@ class MaquinaVending
 	 Stepper stepper1;
 	 Stepper steper2;
 	 Casilla casillas[9];
+	 bool detectarTarjeta();
 	void init();
 private:
-	const String productos[9] = { "Coca Cola", "Fanta Naranja", "Fanta Limon", "Coca Cola Zero", "Cerevza", "Otros", "Coca Cola Light", "Coca cola Light", "Agua" };
-	/*const*/char* imagenes[9] = { "cc.bmp", "fn.bmp", "fl.bmp", "ccz.bmp", "", "", "", "ccl.bmp", ""};
+	const String productos[9] = { "Coca Cola", "Fanta Naranja", "Fanta Limon", "Coca Cola Zero", "Cerevza", "Otros", "Coca Cola Light", "", "Agua" };
+	/*const*/char* imagenes[9] = { "cc.bmp", "fn.bmp", "fl.bmp", "ccz.bmp", "", "", "ccl.bmp", "", ""};
 	const float precios[9] = { 0.75, 0.60, 0.60, 1.20, 0.5, 1.0, 0.90, 0.80, 1.2 };
 };
 

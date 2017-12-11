@@ -7,12 +7,18 @@
 
 int PantallaTFT::seleccionProducto(Casilla casillas[])
 {
+	Casilla ok;
+	ok.imagen = "ok.bmp";
+	ok.region.X = tft.width() * 3 / 4;
+	ok.region.Y = 300;
+
+	int seleccion;
 	if (ventanaActual != Ventana::Seleccion) { //Renderizados que solo se dibujan una vez
 		tft.fillScreen(Color::Negro);
 		for (int i = 0; i < 9; i++)
-		{
 			dibujarBMP(casillas[i].imagen, casillas[i].region.X, casillas[i].region.Y);
-		}
+
+		dibujarBMP(ok.imagen,ok.region.X, ok.region.Y);
 		dibujarRejilla();
 	}
 	ventanaActual = Ventana::Seleccion;
@@ -32,8 +38,11 @@ int PantallaTFT::seleccionProducto(Casilla casillas[])
 					tft.println(String(casillas[i].producto)+"\n");
 					tft.setTextColor(Color::Verde, Color::Negro);
 					tft.println(String(casillas[i].precio, '\02') + "E");
+					seleccion = i;
 				}
 			}
+			if (ok.estaDentro(punto))
+				return seleccion;
 		}
 	}
 	return 0;

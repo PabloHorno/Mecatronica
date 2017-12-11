@@ -4,11 +4,19 @@
 
 #include "MaquinaVending.h"
 
+bool MaquinaVending::
+detectarTarjeta()
+{
+	SPI.endTransaction();
+	SPI.beginTransaction(SPISettings());
+	return maquina.lector.isCard();
+}
+
 void MaquinaVending::init()
 {
 	SPI.begin();
-	lector.init();
 	pantalla.init();
+	lector.init();
 
 	Serial.println("\nCASILLAS");
 	for (int i = 0, index = 0; i < 3; i++)

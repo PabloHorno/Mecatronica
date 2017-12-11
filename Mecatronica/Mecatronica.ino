@@ -18,20 +18,21 @@ void setup() {
 
 void loop() {
 	maquina.pantalla.inicio();
-	if (maquina.lector.isCard())
+
+	if (maquina.detectarTarjeta())
 	{
-		maquina.pantalla.tft.setCursor(10, 200);
-		maquina.pantalla.tft.print("TARJETA DETECTADA");
+		Serial.println("Tarjeta");
+		maquina.pantalla.tft.setCursor(10, 250);
+		maquina.pantalla.tft.setTextColor(Color::Negro);
+		maquina.pantalla.tft.setTextSize(3);
+		maquina.pantalla.printCentrado("TARJETA"); 
+		maquina.pantalla.printCentrado("DETECTADA");
 		maquina.lector.readCardSerial();
-		for (int i = 0; i<5; i++)
-			maquina.pantalla.tft.print(maquina.lector.serNum[i], DEC);
-		maquina.pantalla.tft.println("\n------");
+		maquina.pantalla.tft.setTextSize(2);
 		for (int i = 0; i<5; i++)
 			maquina.pantalla.tft.print(maquina.lector.serNum[i], HEX);
-		while (true)
-		{
-			int respuesta = maquina.pantalla.seleccionProducto(maquina.casillas);
-		}
+		delay(5000);
+
+		int respuesta = maquina.pantalla.seleccionProducto(maquina.casillas);
 	}
-	delay(1000);
 }
